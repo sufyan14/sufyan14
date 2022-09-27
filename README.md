@@ -17,11 +17,11 @@
  
  • Intermediate in CSS, Bootstrap and Basic Js.
  
- • Knowledgable in Java, C and C++.
+ • Knowledgable in Word, Excel, PPT, Java, C and C++.
  
  • Worked on mysql database.
  
- <p>Currently learning React Js and doing IoT course from Cisco Network Academy. <p>
+ <p>Currently learning React Js. <p>
   
 ![icons8-html-5](https://user-images.githubusercontent.com/108999846/185442619-ee058377-69d4-4b99-9ec7-ef351bd84873.svg)
 ![icons8-css3](https://user-images.githubusercontent.com/108999846/185444569-422d0e6f-e21b-4bde-9b0a-c80553eb44a2.svg)

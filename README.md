@@ -4,7 +4,7 @@
 ## <h1 align="center"> Hey, Myself Muhammad Sufyan! </h1>
 
   ## About me
-  I'm Muhammad Sufyan, a 3rd-year Computer Science undergraduate at DHA Suffa University, Passionate candidate, Tech savvy,
+  I'm Muhammad Sufyan, a Final year Computer Science undergraduate at DHA Suffa University, Passionate candidate, Tech savvy,
   can perform multitasking to meet team goals. Interested in Web Development and IT, eager to grab opportunities
   in these fields and explore more!
       

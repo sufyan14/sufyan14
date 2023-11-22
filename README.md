@@ -1,46 +1,66 @@
 ![github-header-image](https://user-images.githubusercontent.com/108999846/185427743-6f69cd27-d24e-40f4-8633-420f79ff1ba3.png)
 
 
-## <h1 align="center"> Hey, Myself Muhammad Sufyan! </h1>
+## <h1 align="center"> Hey, Myself <a href="https://www.linkedin.com/in/msufyan/">Muhammad Sufyan!</a> </h1>
 
   ## About me
-  I'm Muhammad Sufyan, a Final year Computer Science undergraduate at DHA Suffa University, Passionate candidate, Tech savvy,
-  can perform multitasking to meet team goals. Interested in Web Development and IT, eager to grab opportunities
-  in these fields and explore more!
       
-      
+ • Computer Science student at DHA Suffa University.
 
-## <h2 align="center"> Skills </h2>  
-
+ • Currently learning React JS and Django.
  
- • Proficient in HTML coding language. Applied HTML coding to various front-end development websites.
+ • I am looking to collaborate on Frontend projects.
  
- • Intermediate in CSS, SQL and Python.
-
- • Basic JavaScript, React and Firebase.
- 
- • Knowledgable in  Java, C and C++.
+ • Explore my work! <a href="https://msufyan-portfolio.netlify.app">My Portfolio</a>
   
+## Languages and Tools
+
+<div align="center">
   
-![icons8-html-5](https://user-images.githubusercontent.com/108999846/185442619-ee058377-69d4-4b99-9ec7-ef351bd84873.svg)
-![icons8-css3](https://user-images.githubusercontent.com/108999846/185444569-422d0e6f-e21b-4bde-9b0a-c80553eb44a2.svg)
-![icons8-javascript](https://user-images.githubusercontent.com/108999846/185446324-2bc708d4-049d-4a13-8fd5-d4ef335fec25.svg)
-![icons8-c-46](https://user-images.githubusercontent.com/108999846/185445782-3233b9f0-e177-44a2-9cf6-91792052fa22.png)
-![icons8-c-plus-plus-48](https://user-images.githubusercontent.com/108999846/185444586-b691b269-6157-4888-9569-d013faa76cb8.png)
-![icons8-c-sharp-logo (1)](https://user-images.githubusercontent.com/108999846/185445144-674b5cf1-8c51-45b8-b8f7-00136ba815a1.svg)
-![icons8-java (1)](https://user-images.githubusercontent.com/108999846/185447175-de2ba259-0975-4a33-b80e-8a5658341dff.svg)
-![icons8-bootstrap](https://user-images.githubusercontent.com/108999846/185446811-19b9ef29-8050-4eaa-b81c-288e89712f9f.svg)
-![icons8-mysql-logo](https://user-images.githubusercontent.com/108999846/185446823-4efb19d6-cf48-423e-8655-948910dbf4bc.svg)
-![icons8-visual-studio-code-2019](https://user-images.githubusercontent.com/108999846/185447431-b7758f08-ad8f-416b-a06e-f018e10f522c.svg)
+![C/C++](https://img.shields.io/badge/C%2FC%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
- 
+</div>
 
-## Connect with Me!
-  <a target="_blank" href="https://www.linkedin.com/in/muhammad-sufyan42069/">![icons8-linkedin](https://user-images.githubusercontent.com/108999846/185450256-17aff683-89aa-4189-a09e-bcf0dd63c1f2.svg)</a>
-<a href="mailto:muhammadsufyan00ms@gmail.com">![icons8-gmail-logo](https://user-images.githubusercontent.com/108999846/185451307-68b8430a-50ff-425a-a746-4279eec991e5.svg)
-</a>
-<a target="_blank" href="https://github.com/sufyan14">![icons8-github](https://user-images.githubusercontent.com/108999846/185451852-dbff867d-90ca-4858-bd55-419ddb069e20.svg)
-</a>  
+### Top Languages
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=sufyan14&layout=compact&theme=radical)](https://github.com/sufyan14/github-readme-stats)
+
+### GitHub Stats
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=sufyan14&show_icons=true&theme=radical&count_private=true)
+
+### GitHub Streak
+
+![GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=sufyan14&theme=dark)
+
+### Contributions Chart
+
+![GitHub Contributions](https://ghchart.rshah.org/sufyan14)
+
+
+<h2 align="center">Connect with Me!</h2> 
+
+<div align="center">
+  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/msufyan/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:muhammadsufyan00ms@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sufyan14)
+
+</div>
 
 
   

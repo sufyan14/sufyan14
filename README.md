@@ -43,9 +43,6 @@
 
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=sufyan14&show_icons=true&theme=radical&count_private=true)
 
-### GitHub Streak
-
-![GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=sufyan14&theme=dark)
 
 ### Contributions Chart
 

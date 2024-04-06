@@ -7,7 +7,7 @@
       
  • Computer Science student at DHA Suffa University.
 
- • Currently learning React JS and Django.
+ • Currently learning Next JS and Django.
  
  • I am looking to collaborate on Frontend projects.
  

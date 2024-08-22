@@ -5,9 +5,9 @@
 
   ## About me
       
- • Computer Science student at DHA Suffa University.
+ • Computer Science graduate from DHA Suffa University.
 
- • Currently learning Next JS and Django.
+ • Currently working on MERN stack.
  
  • I am looking to collaborate on Frontend projects.
  

@@ -11,7 +11,7 @@
 
  • Currently transitioning to Data Analysis.
  
- • I am looking to collaborate on data projects.
+ • I am looking to collaborate on Data Science/AI projects.
  
  • Explore my work! <a href="https://msufyan-portfolio.vercel.app">My Portfolio</a>
   

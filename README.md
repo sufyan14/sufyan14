@@ -57,11 +57,21 @@
 ## 🚀 GitHub Stats
 
 <!--START_SECTION:github_stats-->
+- 💻 Total Commits (past year): 0
+- 🏷 Repositories Contributed: 28
+- 🔁 PRs Merged: 0
+- 📈 Contribution Score: 28/100
 <!--END_SECTION:github_stats-->
 
 ## 💡 Top Languages
 
 <!--START_SECTION:top_langs-->
+- Jupyter Notebook ██████████████ 71%
+- JavaScript ██ 11%
+- HTML ██ 8%
+- CSS █ 7%
+- Python █ 3%
+
 <!--END_SECTION:top_langs-->
 
 

@@ -54,13 +54,13 @@
 
 </div>
 
-### Top Languages
+## 📊 GitHub Stats
+<!--START_STATS-->
+<!--END_STATS-->
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=sufyan14&layout=compact&theme=radical)](https://github.com/sufyan14/github-readme-stats)
-
-### GitHub Stats
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=sufyan14&show_icons=true&theme=radical&count_private=true)
+## 💻 Top Languages
+<!--START_LANGS-->
+<!--END_LANGS-->
 
 
 ### Contributions Chart

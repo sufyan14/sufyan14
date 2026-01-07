@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Required to push changes
   pull-requests: read
 
 jobs:
@@ -22,14 +22,15 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const username = 'sufyan14';
+            const fs = require('fs');
 
-            // 1️⃣ Fetch all repos you own (public + private)
+            // Fetch all repos (public + private) owned by the user
             const repos = await github.paginate(
               github.rest.repos.listForUser,
-              { username, per_page: 100, type: 'owner' } // type 'owner' includes private repos
+              { username, per_page: 100, type: 'owner' }
             );
 
-            // 2️⃣ Count commits authored by you
+            // Count commits authored by user
             let totalCommits = 0;
             for (const repo of repos) {
               try {
@@ -43,7 +44,7 @@ jobs:
               } catch {}
             }
 
-            // 3️⃣ Count merged PRs authored by you
+            // Count merged PRs authored by user
             let mergedPRs = 0;
             for (const repo of repos) {
               try {
@@ -57,7 +58,7 @@ jobs:
               } catch {}
             }
 
-            // 4️⃣ Calculate top languages
+            // Calculate top languages
             const langMap = {};
             for (const repo of repos) {
               try {
@@ -70,11 +71,11 @@ jobs:
 
             const sortedLangs = Object.entries(langMap)
               .sort((a,b) => b[1]-a[1])
-              .slice(0,5); // top 5 languages
+              .slice(0,5);
 
             const totalBytes = sortedLangs.reduce((sum,[_,b]) => sum+b, 0);
 
-            // 5️⃣ Build dynamic progress bars
+            // Build dynamic progress bars
             const bars = sortedLangs.map(([lang, bytes]) => {
               const percent = totalBytes === 0 ? 0 : Math.round((bytes / totalBytes) * 100);
               const blocks = Math.round(percent / 10); // 10 blocks max
@@ -83,35 +84,32 @@ jobs:
               else if (percent >= 40) color = '🟨';
               else color = '🟥';
               const bar = color.repeat(blocks) + '⬜'.repeat(10 - blocks);
-              return `- ${lang.padEnd(10)}: ${bar} ${percent}%`;
-            }).join('\n');
+              return "- " + lang.padEnd(10) + ": " + bar + " " + percent + "%";
+            }).join("\n");
 
-            // 6️⃣ Contribution score
+            // Contribution score
             const contributionScore = Math.min(100, Math.round(totalCommits / 5 + mergedPRs * 2 + repos.length));
 
-            // 7️⃣ Update README.md
-            const fs = require('fs');
+            // Update README.md
             let readme = fs.readFileSync('README.md', 'utf8');
-
             const statsText =
-              `- 💻 Total Commits: ${totalCommits}\n` +
-              `- 🏷 Repositories Contributed: ${repos.length}\n` +
-              `- 🔁 PRs Merged: ${mergedPRs}\n` +
-              `- 📈 Contribution Score: ${contributionScore}/100\n` +
-              `- 🖥 Top Languages:\n${bars}`;
+              "- 💻 Total Commits: " + totalCommits + "\n" +
+              "- 🏷 Repositories Contributed: " + repos.length + "\n" +
+              "- 🔁 PRs Merged: " + mergedPRs + "\n" +
+              "- 📈 Contribution Score: " + contributionScore + "/100\n" +
+              "- 🖥 Top Languages:\n" + bars;
 
             readme = readme.replace(
               /<!--START_SECTION:github_stats-->[\s\S]*<!--END_SECTION:github_stats-->/,
-              `<!--START_SECTION:github_stats-->\n${statsText}\n<!--END_SECTION:github_stats-->`
+              "<!--START_SECTION:github_stats-->\n" + statsText + "\n<!--END_SECTION:github_stats-->"
             );
 
             fs.writeFileSync('README.md', readme);
 
-             - name: Commit changes
-               run: |
-                git config user.name "github-actions"
-                git config user.email "github-actions@github.com"
-                git add README.md
-                git commit -m "Update dynamic GitHub stats" || exit 0
-                git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/sufyan14/sufyan14.git HEAD:main --force
-
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add README.md
+          git commit -m "Update dynamic GitHub stats" || exit 0
+          git push

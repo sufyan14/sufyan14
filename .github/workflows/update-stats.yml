@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pull-requests: read
 
 jobs:
   update-readme:
@@ -22,10 +23,13 @@ jobs:
           script: |
             const username = 'sufyan14';
 
-            // 1️⃣ Fetch all user repos
-            const repos = await github.paginate(github.rest.repos.listForUser, { username, per_page: 100 });
+            // 1️⃣ Fetch all repos you own (public + private)
+            const repos = await github.paginate(
+              github.rest.repos.listForUser,
+              { username, per_page: 100, type: 'owner' } // type 'owner' includes private repos
+            );
 
-            // 2️⃣ Count commits authored by user
+            // 2️⃣ Count commits authored by you
             let totalCommits = 0;
             for (const repo of repos) {
               try {
@@ -39,7 +43,7 @@ jobs:
               } catch {}
             }
 
-            // 3️⃣ Count merged PRs authored by user
+            // 3️⃣ Count merged PRs authored by you
             let mergedPRs = 0;
             for (const repo of repos) {
               try {
@@ -66,7 +70,7 @@ jobs:
 
             const sortedLangs = Object.entries(langMap)
               .sort((a,b) => b[1]-a[1])
-              .slice(0,5); // top 5
+              .slice(0,5); // top 5 languages
 
             const totalBytes = sortedLangs.reduce((sum,[_,b]) => sum+b, 0);
 

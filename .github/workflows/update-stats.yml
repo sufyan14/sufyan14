@@ -71,7 +71,7 @@ jobs:
 
             // 6️⃣ Build stats markdown
             const statsText =
-              "- 💻 Total Commits (authored by me): " + totalCommits + "\n" +
+              "- 💻 Total Commits: " + totalCommits + "\n" +
               "- 🏷 Repositories Contributed: " + repos.length + "\n" +
               "- 🔁 PRs Merged: " + mergedPRs + "\n" +
               "- 📈 Contribution Score: " + contributionScore + "/100";
@@ -89,42 +89,38 @@ jobs:
 
               const chartData = {
                 type: 'doughnut',
-                  data: {
-                    labels: topLangs,
-                    datasets: [{
-                      data: topBytes,
-                      backgroundColor: ['#f1e05a','#3572A5','#563d7c','#e34c26','#61dafb'],
-                    }]
-                  },
-                  options: {
-                    plugins: {
-                      legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                          font: { size: 10 } // smaller font for legend
-                        }
-                      },
-                      title: {
-                        display: false
-                      },
-                      datalabels: {
-                        display: false // hides numbers inside the doughnut
+                data: {
+                  labels: topLangs,
+                  datasets: [{
+                    data: topBytes,
+                    backgroundColor: ['#f1e05a','#3572A5','#563d7c','#e34c26','#61dafb'],
+                  }]
+                },
+                options: {
+                  plugins: {
+                    legend: {
+                      display: true,
+                      position: 'bottom',
+                      labels: {
+                        font: { size: 10 },      // smaller font
+                        usePointStyle: true,     // smaller color boxes
+                        padding: 10              // less spacing between labels
                       }
                     },
-                    cutout: '50%' // makes the doughnut hole bigger, like in your screenshot
-                  }
-                };
+                    title: { display: false },
+                    datalabels: { display: false }
+                  },
+                  cutout: '50%' // bigger doughnut hole
+                }
+              };
               
-                // Small chart size 200x200
-                const chartURL = 'https://quickchart.io/chart?width=200&height=200&c=' + encodeURIComponent(JSON.stringify(chartData));
+              const chartURL = 'https://quickchart.io/chart?width=200&height=200&c=' + encodeURIComponent(JSON.stringify(chartData));
               
-                readme = readme.replace(
-                  /!\[Top Languages\]\([^\)]*\)/,
-                  `![Top Languages](${chartURL})`
-                );
-              }
-              
+              readme = readme.replace(
+                /!\[Top Languages\]\([^\)]*\)/,
+                `![Top Languages](${chartURL})`
+              );
+            }
 
             fs.writeFileSync('README.md', readme);
 
@@ -135,4 +131,3 @@ jobs:
           git add README.md
           git commit -m "Update dynamic GitHub stats" || exit 0
           git push --force
-

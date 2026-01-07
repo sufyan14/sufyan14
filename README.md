@@ -55,12 +55,8 @@
 </div>
 
 ## 📊 GitHub Stats
-<!--START_STATS-->
-<!--END_STATS-->
-
-## 💻 Top Languages
-<!--START_LANGS-->
-<!--END_LANGS-->
+<!--START_SECTION:github_stats-->
+<!--END_SECTION:github_stats-->
 
 
 ### Contributions Chart

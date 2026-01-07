@@ -107,10 +107,11 @@ jobs:
 
             fs.writeFileSync('README.md', readme);
 
-      - name: Commit changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add README.md
-          git commit -m "Update dynamic GitHub stats" || exit 0
-          git push --force
+             - name: Commit changes
+               run: |
+                git config user.name "github-actions"
+                git config user.email "github-actions@github.com"
+                git add README.md
+                git commit -m "Update dynamic GitHub stats" || exit 0
+                git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/sufyan14/sufyan14.git HEAD:main --force
+

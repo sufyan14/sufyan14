@@ -58,7 +58,6 @@
 <!--START_SECTION:github_stats-->
 <!--END_SECTION:github_stats-->
 
-
 ### Contributions Chart
 
 ![GitHub Contributions](https://ghchart.rshah.org/sufyan14)

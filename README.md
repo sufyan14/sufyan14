@@ -54,12 +54,16 @@
 
 </div>
 
-## 📊 GitHub Stats
+## 🚀 GitHub Stats
+
 <!--START_SECTION:github_stats-->
-- ⭐ Total Stars: 0
-- 📦 Public Repositories: 28
-- 🔥 Recent Public Events: 26
 <!--END_SECTION:github_stats-->
+
+## 💡 Top Languages
+
+<!--START_SECTION:top_langs-->
+<!--END_SECTION:top_langs-->
+
 
 ### Contributions Chart
 

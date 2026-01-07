@@ -15,12 +15,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Fetch GitHub stats and update README
+      - name: Update stats with progress bars
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Config
             const username = 'sufyan14';
 
             // 1️⃣ Fetch all user repos
@@ -54,7 +53,7 @@ jobs:
               } catch {}
             }
 
-            // 4️⃣ Top languages
+            // 4️⃣ Calculate top languages
             const langMap = {};
             for (const repo of repos) {
               try {
@@ -64,12 +63,29 @@ jobs:
                 }
               } catch {}
             }
-            const sortedLangs = Object.entries(langMap).sort((a,b) => b[1]-a[1]).slice(0,5);
 
-            // 5️⃣ Contribution score
+            const sortedLangs = Object.entries(langMap)
+              .sort((a,b) => b[1]-a[1])
+              .slice(0,5); // top 5
+
+            const totalBytes = sortedLangs.reduce((sum,[_,b]) => sum+b, 0);
+
+            // 5️⃣ Build dynamic progress bars
+            const bars = sortedLangs.map(([lang, bytes]) => {
+              const percent = totalBytes === 0 ? 0 : Math.round((bytes / totalBytes) * 100);
+              const blocks = Math.round(percent / 10); // 10 blocks max
+              let color;
+              if (percent >= 60) color = '🟩';
+              else if (percent >= 40) color = '🟨';
+              else color = '🟥';
+              const bar = color.repeat(blocks) + '⬜'.repeat(10 - blocks);
+              return `- ${lang.padEnd(10)}: ${bar} ${percent}%`;
+            }).join('\n');
+
+            // 6️⃣ Contribution score
             const contributionScore = Math.min(100, Math.round(totalCommits / 5 + mergedPRs * 2 + repos.length));
 
-            // 6️⃣ Update README.md stats section
+            // 7️⃣ Update README.md
             const fs = require('fs');
             let readme = fs.readFileSync('README.md', 'utf8');
 
@@ -77,58 +93,16 @@ jobs:
               `- 💻 Total Commits: ${totalCommits}\n` +
               `- 🏷 Repositories Contributed: ${repos.length}\n` +
               `- 🔁 PRs Merged: ${mergedPRs}\n` +
-              `- 📈 Contribution Score: ${contributionScore}/100`;
+              `- 📈 Contribution Score: ${contributionScore}/100\n` +
+              `- 🖥 Top Languages:\n${bars}`;
 
             readme = readme.replace(
               /<!--START_SECTION:github_stats-->[\s\S]*<!--END_SECTION:github_stats-->/,
               `<!--START_SECTION:github_stats-->\n${statsText}\n<!--END_SECTION:github_stats-->`
             );
 
-            // 7️⃣ Build QuickChart doughnut URL
-            if (sortedLangs.length > 0) {
-              const topLangs = sortedLangs.map(([lang]) => lang);
-              const topBytes = sortedLangs.map(([_, bytes]) => bytes);
-
-              const chartData = {
-                type: 'doughnut',
-                data: {
-                  labels: topLangs,
-                  datasets: [{
-                    data: topBytes,
-                    backgroundColor: ['#f1e05a','#3572A5','#563d7c','#e34c26','#61dafb']
-                  }]
-                },
-                options: {
-                  plugins: {
-                    legend: {
-                      display: true,
-                      position: 'bottom',
-                      labels: {
-                        fontSize: 10,     // smaller font
-                        usePointStyle: true,
-                        padding: 10
-                      }
-                    },
-                    title: { display: false },
-                    datalabels: { display: false }
-                  },
-                  cutout: '50%' // bigger doughnut hole
-                }
-              };
-
-              const chartURL = 'https://quickchart.io/chart?width=200&height=200&c=' +
-                encodeURIComponent(JSON.stringify(chartData));
-
-              // Replace the existing Top Languages image
-              readme = readme.replace(
-                /!\[Top Languages\]\([^\)]*\)/,
-                `![Top Languages](${chartURL})`
-              );
-            }
-
-            // 8️⃣ Write back README.md
             fs.writeFileSync('README.md', readme);
-      
+
       - name: Commit changes
         run: |
           git config user.name "github-actions"

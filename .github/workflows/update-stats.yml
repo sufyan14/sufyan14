@@ -1,4 +1,4 @@
-name: Update Profile Stats
+name: Dynamic GitHub Stats
 
 on:
   schedule:
@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Generate GitHub Stats
+      - name: Update dynamic stats
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -22,23 +22,67 @@ jobs:
             const fs = require('fs');
             const username = 'sufyan14';
 
+            // Fetch repos
             const repos = await github.paginate(github.rest.repos.listForUser, { username, per_page: 100 });
-            let stars = 0;
-            repos.forEach(r => { stars += r.stargazers_count; });
 
-            const events = await github.paginate(github.rest.activity.listPublicEventsForUser, { username, per_page: 100 });
+            // Total commits
+            let totalCommits = 0;
+            for (const repo of repos) {
+              const stats = await github.rest.repos.getCommitActivityStats({ owner: username, repo: repo.name });
+              if (stats.data) stats.data.forEach(week => { totalCommits += week.total; });
+            }
 
-            // Build a simple string line by line
-            const stats = "- ⭐ Total Stars: " + stars + "\n" +
-                          "- 📦 Public Repositories: " + repos.length + "\n" +
-                          "- 🔥 Recent Public Events: " + events.length;
+            // PRs merged
+            let mergedPRs = 0;
+            for (const repo of repos) {
+              const prs = await github.paginate(github.rest.pulls.list, {
+                owner: username,
+                repo: repo.name,
+                state: 'closed'
+              });
+              mergedPRs += prs.filter(pr => pr.merged_at).length;
+            }
+
+            // Languages
+            const langMap = {};
+            for (const repo of repos) {
+              const langs = await github.rest.repos.listLanguages({ owner: username, repo: repo.name });
+              for (const lang in langs.data) {
+                if (!langMap[lang]) langMap[lang] = 0;
+                langMap[lang] += langs.data[lang];
+              }
+            }
+            const sortedLangs = Object.entries(langMap).sort((a,b) => b[1]-a[1]).slice(0,5);
+
+            // Contribution score
+            const contributionScore = Math.min(100, Math.round(totalCommits/5 + mergedPRs*2 + repos.length));
+
+            // Build stats text using plain string concatenation
+            const stats =
+              "- 💻 Total Commits (past year): " + totalCommits + "\n" +
+              "- 🏷 Repositories Contributed: " + repos.length + "\n" +
+              "- 🔁 PRs Merged: " + mergedPRs + "\n" +
+              "- 📈 Contribution Score: " + contributionScore + "/100";
 
             let readme = fs.readFileSync('README.md', 'utf8');
 
-            // Replace the placeholder section safely
             readme = readme.replace(
               /<!--START_SECTION:github_stats-->[\s\S]*<!--END_SECTION:github_stats-->/,
               "<!--START_SECTION:github_stats-->\n" + stats + "\n<!--END_SECTION:github_stats-->"
+            );
+
+            // Top languages
+            let langsMarkdown = "";
+            const totalBytes = Object.values(langMap).reduce((a,b) => a+b, 0);
+            for (const [lang, bytes] of sortedLangs) {
+              const percent = Math.round((bytes/totalBytes)*100);
+              const bars = "█".repeat(Math.round(percent/5));
+              langsMarkdown += "- " + lang + " " + bars + " " + percent + "%\n";
+            }
+
+            readme = readme.replace(
+              /<!--START_SECTION:top_langs-->[\s\S]*<!--END_SECTION:top_langs-->/,
+              "<!--START_SECTION:top_langs-->\n" + langsMarkdown + "\n<!--END_SECTION:top_langs-->"
             );
 
             fs.writeFileSync('README.md', readme);
@@ -48,5 +92,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add README.md
-          git commit -m "Update GitHub stats" || exit 0
+          git commit -m "Update dynamic GitHub stats" || exit 0
           git push

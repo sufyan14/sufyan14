@@ -65,12 +65,8 @@
 
 ## 💡 Top Languages
 
-<!--START_SECTION:top_langs-->
-- Jupyter Notebook ██████████████ 71%
-- JavaScript ██ 11%
-- HTML ██ 8%
-- CSS █ 7%
-- Python █ 3%
+![Top Languages](https://quickchart.io/chart?c={})
+
 
 <!--END_SECTION:top_langs-->
 

@@ -14,114 +14,107 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update dynamic stats
-        uses: actions/github-script@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs');
-            const username = 'sufyan14';
+          node-version: '20'
 
-            // 1️⃣ Fetch your repos
-            const repos = await github.paginate(github.rest.repos.listForUser, { username, per_page: 100 });
+      - name: Update dynamic stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node -e "
+          const fs = require('fs');
+          const { Octokit } = require('@octokit/rest');
+          const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+          const username = 'sufyan14';
 
-            // 2️⃣ Count commits authored by you
+          (async () => {
+            // Fetch repos
+            const repos = await octokit.paginate(octokit.repos.listForUser, { username, per_page: 100 });
+
+            // Total commits
             let totalCommits = 0;
             for (const repo of repos) {
               try {
-                const commits = await github.paginate(github.rest.repos.listCommits, {
+                const commits = await octokit.paginate(octokit.repos.listCommits, {
                   owner: username,
                   repo: repo.name,
                   author: username,
                   per_page: 100
                 });
                 totalCommits += commits.length;
-              } catch (err) { }
+              } catch {}
+
             }
 
-            // 3️⃣ Count merged PRs authored by you
+            // Merged PRs
             let mergedPRs = 0;
             for (const repo of repos) {
               try {
-                const prs = await github.paginate(github.rest.pulls.list, {
+                const prs = await octokit.paginate(octokit.pulls.list, {
                   owner: username,
                   repo: repo.name,
                   state: 'closed',
                   per_page: 100
                 });
                 mergedPRs += prs.filter(pr => pr.merged_at && pr.user.login === username).length;
-              } catch (err) { }
+              } catch {}
             }
 
-            // 4️⃣ Top languages across repos
+            // Top languages
             const langMap = {};
             for (const repo of repos) {
               try {
-                const langs = await github.rest.repos.listLanguages({ owner: username, repo: repo.name });
+                const langs = await octokit.repos.listLanguages({ owner: username, repo: repo.name });
                 for (const lang in langs.data) {
-                  if (!langMap[lang]) langMap[lang] = 0;
-                  langMap[lang] += langs.data[lang];
+                  langMap[lang] = (langMap[lang] || 0) + langs.data[lang];
                 }
-              } catch (err) { }
+              } catch {}
             }
             const sortedLangs = Object.entries(langMap).sort((a,b) => b[1]-a[1]).slice(0,5);
 
-            // 5️⃣ Contribution Score
+            // Contribution score
             const contributionScore = Math.min(100, Math.round(totalCommits/5 + mergedPRs*2 + repos.length));
 
-            // 6️⃣ Build stats markdown
-            const statsText =
-              "- 💻 Total Commits: " + totalCommits + "\n" +
-              "- 🏷 Repositories Contributed: " + repos.length + "\n" +
-              "- 🔁 PRs Merged: " + mergedPRs + "\n" +
-              "- 📈 Contribution Score: " + contributionScore + "/100";
-
+            // Update README
             let readme = fs.readFileSync('README.md', 'utf8');
+            const statsText =
+              '- 💻 Total Commits: ' + totalCommits + '\\n' +
+              '- 🏷 Repositories Contributed: ' + repos.length + '\\n' +
+              '- 🔁 PRs Merged: ' + mergedPRs + '\\n' +
+              '- 📈 Contribution Score: ' + contributionScore + '/100';
+
             readme = readme.replace(
-              /<!--START_SECTION:github_stats-->[\s\S]*<!--END_SECTION:github_stats-->/,
-              "<!--START_SECTION:github_stats-->\n" + statsText + "\n<!--END_SECTION:github_stats-->"
+              /<!--START_SECTION:github_stats-->[\\s\\S]*<!--END_SECTION:github_stats-->/,
+              '<!--START_SECTION:github_stats-->\\n' + statsText + '\\n<!--END_SECTION:github_stats-->'
             );
 
-            // Build doughnut chart URL for top languages
+            // Build doughnut chart
             if (sortedLangs.length > 0) {
-              const topLangs = sortedLangs.map(([lang, bytes]) => lang);
-              const topBytes = sortedLangs.map(([lang, bytes]) => bytes);
+              const topLangs = sortedLangs.map(([lang]) => lang);
+              const topBytes = sortedLangs.map(([_, bytes]) => bytes);
 
               const chartData = {
                 type: 'doughnut',
-                data: {
-                  labels: topLangs,
-                  datasets: [{
-                    data: topBytes,
-                    backgroundColor: ['#f1e05a','#3572A5','#563d7c','#e34c26','#61dafb'],
-                  }]
-                },
+                data: { labels: topLangs, datasets: [{ data: topBytes, backgroundColor: ['#f1e05a','#3572A5','#563d7c','#e34c26','#61dafb'] }] },
                 options: {
                   plugins: {
-                    legend: {
-                      display: true,
-                      position: 'bottom',
-                      labels: { fontSize: 10 } ,      // smaller font
-                        usePointStyle: true,     // smaller color boxes
-                        padding: 10              // less spacing between labels
-                      }
-                    },
+                    legend: { display: true, position: 'bottom', labels: { fontSize: 10, usePointStyle: true, padding: 10 } },
                     title: { display: false },
                     datalabels: { display: false }
                   },
-                  cutout: '50%' // bigger doughnut hole
+                  cutout: '50%'
                 }
               };
-              
+
               const chartURL = 'https://quickchart.io/chart?width=200&height=200&c=' + encodeURIComponent(JSON.stringify(chartData));
-              
-              readme = readme.replace(
-                /!\[Top Languages\]\([^\)]*\)/,
-                `![Top Languages](${chartURL})`
-              );
+              readme = readme.replace(/!\[Top Languages\]\([^\)]*\)/, `![Top Languages](${chartURL})`);
             }
 
             fs.writeFileSync('README.md', readme);
+          })();
+          "
 
       - name: Commit changes
         run: |

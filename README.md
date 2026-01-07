@@ -57,15 +57,15 @@
 ## 🚀 GitHub Stats
 
 <!--START_SECTION:github_stats-->
-- 💻 Total Commits: 191
+- 💻 Total Commits: 194
 - 🏷 Repositories Contributed: 28
 - 🔁 PRs Merged: 0
-- 📈 Contribution Score: 66/100
+- 📈 Contribution Score: 67/100
 <!--END_SECTION:github_stats-->
 
 ## 💡 Top Languages
 
-![Top Languages](https://quickchart.io/chart?width=200&height=200&c=%7B%22type%22%3A%22doughnut%22%2C%22data%22%3A%7B%22labels%22%3A%5B%22Jupyter%20Notebook%22%2C%22JavaScript%22%2C%22HTML%22%2C%22CSS%22%2C%22Python%22%5D%2C%22datasets%22%3A%5B%7B%22data%22%3A%5B575325%2C89687%2C63873%2C52821%2C23218%5D%2C%22backgroundColor%22%3A%5B%22%23f1e05a%22%2C%22%233572A5%22%2C%22%23563d7c%22%2C%22%23e34c26%22%2C%22%2361dafb%22%5D%7D%5D%7D%2C%22options%22%3A%7B%22plugins%22%3A%7B%22legend%22%3A%7B%22display%22%3Atrue%2C%22position%22%3A%22bottom%22%2C%22labels%22%3A%7B%22font%22%3A%7B%22size%22%3A10%7D%2C%22usePointStyle%22%3Atrue%2C%22padding%22%3A10%7D%7D%2C%22title%22%3A%7B%22display%22%3Afalse%7D%2C%22datalabels%22%3A%7B%22display%22%3Afalse%7D%7D%2C%22cutout%22%3A%2250%25%22%7D%7D)
+![Top Languages](https://quickchart.io/chart?width=200&height=200&c=%7B%22type%22%3A%22doughnut%22%2C%22data%22%3A%7B%22labels%22%3A%5B%22Jupyter%20Notebook%22%2C%22JavaScript%22%2C%22HTML%22%2C%22CSS%22%2C%22Python%22%5D%2C%22datasets%22%3A%5B%7B%22data%22%3A%5B575325%2C89687%2C63873%2C52821%2C23218%5D%2C%22backgroundColor%22%3A%5B%22%23f1e05a%22%2C%22%233572A5%22%2C%22%23563d7c%22%2C%22%23e34c26%22%2C%22%2361dafb%22%5D%7D%5D%7D%2C%22options%22%3A%7B%22plugins%22%3A%7B%22legend%22%3A%7B%22display%22%3Atrue%2C%22position%22%3A%22bottom%22%2C%22labels%22%3A%7B%22fontSize%22%3A10%2C%22usePointStyle%22%3Atrue%2C%22padding%22%3A10%7D%7D%2C%22title%22%3A%7B%22display%22%3Afalse%7D%2C%22datalabels%22%3A%7B%22display%22%3Afalse%7D%7D%2C%22cutout%22%3A%2250%25%22%7D%7D)
 
 
 <!--END_SECTION:top_langs-->

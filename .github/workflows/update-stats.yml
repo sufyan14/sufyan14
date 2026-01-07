@@ -101,8 +101,7 @@ jobs:
                     legend: {
                       display: true,
                       position: 'bottom',
-                      labels: {
-                        font: { size: 10 },      // smaller font
+                      labels: { fontSize: 10 } ,      // smaller font
                         usePointStyle: true,     // smaller color boxes
                         padding: 10              // less spacing between labels
                       }

@@ -102,7 +102,7 @@ jobs:
                   }
                 }
               };
-              const chartURL = 'https://quickchart.io/chart?width=400&height=400&c=' + encodeURIComponent(JSON.stringify(chartData));
+              const chartURL = 'https://quickchart.io/chart?width=200&height=200&c=' + encodeURIComponent(JSON.stringify(chartData));
               readme = readme.replace(
                 /!\[Top Languages\]\([^\)]*\)/,
                 `![Top Languages](${chartURL})`

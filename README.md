@@ -57,16 +57,16 @@
 ## 💡 GitHub Stats
 
 <!--START_SECTION:github_stats-->
-- 💻 Total Commits: 236
-- 🏷 Repositories Contributed: 29
+- 💻 Total Commits: 237
+- 🏷 Repositories Contributed: 30
 - 🔁 PRs Merged: 0
-- 📈 Contribution Score: 76/100
+- 📈 Contribution Score: 77/100
 ### 🖥 Top Languages
-- Jupyter Notebook: 🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜ 83%
-- JavaScript: 🟥⬜⬜⬜⬜⬜⬜⬜⬜⬜ 6%
-- HTML      : ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 4%
-- CSS       : ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 4%
-- Python    : ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 3%
+- Jupyter Notebook: 🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜ 90%
+- JavaScript: ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 3%
+- HTML      : ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 2%
+- CSS       : ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 2%
+- Python    : ⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜ 2%
 <!--END_SECTION:github_stats-->
 
 ### Contributions Chart
